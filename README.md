@@ -1,18 +1,24 @@
-# Edge Spotify
+# Edge Spotify (Boring Notch fork)
 
-Notch live-activity for macOS. **No Xcode** — `swiftc` only.
+Spotify / system **Now Playing**-only fork of [Boring Notch](https://github.com/TheBoredTeam/boring.notch) (GPL-3.0).
 
-## What you get
+Keeps Boring Notch’s exact notch chrome and music live-activity / open-notch player UI, wired to:
 
-- Closed state sits on the **real Mac notch** (width from `auxiliaryTopLeft/RightArea`)
-- **Album art** left + **spectrum** right (Boring Notch–style Now Playing bar)
-- Hover expands the notch into a mini player
-- Sources: **Now Playing** (default) or **Spotify** (menu bar)
+- **Spotify** (`SpotifyController`)
+- **Now Playing** (`NowPlayingController` + `mediaremote-adapter`)
 
-Now Playing adapter adapted from [Boring Notch](https://github.com/TheBoredTeam/boring.notch).
+Calendar, Shelf, OSD/HUD, Webcam, Battery, Downloads, YouTube Music, Apple Music as a selectable source, and the XPC helper are removed.
 
-## Run
+## Build
+
+Requires Xcode / `xcodebuild` on macOS:
 
 ```bash
-./Scripts/run.sh
+xcodebuild -project boringNotch.xcodeproj -scheme boringNotch -configuration Debug -destination 'platform=macOS' -derivedDataPath /tmp/edge-spotify-dd build
+```
+
+Run:
+
+```bash
+open /tmp/edge-spotify-dd/Build/Products/Debug/boringNotch.app
 ```
