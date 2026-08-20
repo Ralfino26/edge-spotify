@@ -6,7 +6,7 @@ A minimal macOS notch app for Spotify / system Now Playing.
 
 Fork of [Boring Notch](https://github.com/TheBoredTeam/boring.notch) — same notch chrome and music live-activity, stripped to music only.
 
-Hover the **notch** to open the player. Control Spotify or whatever is in system Now Playing. It lives in the menu bar (no Dock icon).
+Hover the **notch** to open the player. Control Spotify or whatever is in system Now Playing. No Dock icon, no menu bar icon — just the notch.
 
 ## Requirements
 
@@ -38,13 +38,12 @@ open /Applications/EdgeSpotify.app
 
 1. Play music in Spotify (or another app that reports Now Playing)
 2. Hover the MacBook notch to open the player
-3. Menu bar → **Edge Spotify** → Quit
 
 ### Open at Login
 
-On first launch, Edge Spotify registers itself to start when you log in. Toggle it anytime via menu bar → **Open at Login**.
+On first launch, Edge Spotify registers itself to start when you log in.
 
-macOS may ask for permission under **System Settings → General → Login Items**.
+Manage it under **System Settings → General → Login Items** (EdgeSpotify).
 
 ## Stack
 

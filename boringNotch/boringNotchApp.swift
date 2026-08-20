@@ -17,7 +17,6 @@ import SwiftUI
 struct DynamicNotchApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.openWindow) var openWindow
-    @State private var openAtLogin = LaunchAtLogin.isEnabled
 
     private let sparkleUpdaterDelegate: BoringSparkleUpdaterDelegate
     let updaterController: SPUStandardUpdaterController
@@ -31,22 +30,11 @@ struct DynamicNotchApp: App {
     }
 
     var body: some Scene {
-        MenuBarExtra("Edge Spotify", systemImage: "music.note") {
-            Toggle("Open at Login", isOn: Binding(
-                get: { openAtLogin },
-                set: { newValue in
-                    LaunchAtLogin.isEnabled = newValue
-                    openAtLogin = LaunchAtLogin.isEnabled
-                }
-            ))
-            Divider()
-            Button("Restart") {
-                ApplicationRelauncher.restart()
-            }
-            Button("Quit Edge Spotify", role: .destructive) {
-                NSApplication.shared.terminate(self)
-            }
-            .keyboardShortcut(KeyEquivalent("Q"), modifiers: .command)
+        // No menu bar icon — notch-only background app (like other status utilities).
+        MenuBarExtra(isInserted: .constant(false)) {
+            EmptyView()
+        } label: {
+            EmptyView()
         }
     }
 }
