@@ -28,21 +28,13 @@ struct DynamicNotchApp: App {
             startingUpdater: true, updaterDelegate: sparkleUpdaterDelegate, userDriverDelegate: nil)
         SoftwareUpdateStore.updater = updaterController.updater
 
-        // Initialize the settings window controller with the updater controller
-        SettingsWindowController.shared.setUpdaterController(updaterController)
     }
 
     var body: some Scene {
         MenuBarExtra("boring.notch", systemImage: "sparkle", isInserted: $showMenuBarIcon) {
-            Button("Settings") {
-                DispatchQueue.main.async {
-                    SettingsWindowController.shared.showWindow()
-                }
-            }
-            .keyboardShortcut(KeyEquivalent(","), modifiers: .command)
             CheckForUpdatesView(updater: updaterController.updater)
             Divider()
-            Button("Restart Boring Notch") {
+            Button("Restart") {
                 ApplicationRelauncher.restart()
             }
             Button("Quit", role: .destructive) {
@@ -615,10 +607,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //                        NSApp.setActivationPolicy(.accessory)
                         window.close()
                         NSApp.deactivate()
-                    },
-                    onOpenSettings: {
-                        window.close()
-                        SettingsWindowController.shared.showWindow()
                     }
                 ))
             window.isRestorable = false

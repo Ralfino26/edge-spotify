@@ -21,7 +21,6 @@ struct OnboardingView: View {
     @State var step: OnboardingStep = .welcome
     let updater: SPUUpdater?
     let onFinish: () -> Void
-    let onOpenSettings: () -> Void
 
     var body: some View {
         ZStack {
@@ -90,7 +89,7 @@ struct OnboardingView: View {
                 .transition(.opacity)
 
             case .finished:
-                OnboardingFinishView(onFinish: onFinish, onOpenSettings: onOpenSettings)
+                OnboardingFinishView(onFinish: onFinish)
             }
         }
         .frame(width: 400, height: 600)

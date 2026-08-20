@@ -5,12 +5,10 @@
 //  Created by Alexander on 2025-06-23.
 //
 
-
 import SwiftUI
 
 struct OnboardingFinishView: View {
     let onFinish: () -> Void
-    let onOpenSettings: () -> Void
 
     var body: some View {
         VStack(spacing: 20) {
@@ -25,7 +23,7 @@ struct OnboardingFinishView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
 
-            Text("You can now enjoy the app. If you want to tweak things further, you can always visit the settings.")
+            Text("You can now enjoy the app.")
                 .font(.body)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -34,19 +32,11 @@ struct OnboardingFinishView: View {
             Spacer()
             Spacer()
 
-            VStack(spacing: 12) {
-                Button(action: onOpenSettings) {
-                    Label("Customize in Settings", systemImage: "gear")
-                        .controlSize(.large)
-                }
+            Button("Finish", action: onFinish)
+                .buttonStyle(.borderedProminent)
                 .controlSize(.large)
-
-                Button("Finish", action: onFinish)
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.large)
-                    .keyboardShortcut(.defaultAction)
-            }
-            .padding(24)
+                .keyboardShortcut(.defaultAction)
+                .padding(24)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
@@ -57,5 +47,5 @@ struct OnboardingFinishView: View {
 }
 
 #Preview {
-    OnboardingFinishView(onFinish: { }, onOpenSettings: { })
+    OnboardingFinishView(onFinish: { })
 }

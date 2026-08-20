@@ -31,27 +31,7 @@ struct BoringHeader: View {
             }
 
             HStack(spacing: 4) {
-                if vm.notchState == .open {
-                    if Defaults[.settingsIconInNotch] {
-                        Button(action: {
-                            DispatchQueue.main.async {
-                                SettingsWindowController.shared.showWindow()
-                            }
-                            
-                        }) {
-                            Capsule()
-                                .fill(.black)
-                                .frame(width: 30, height: 30)
-                                .overlay {
-                                    Image(systemName: "gear")
-                                        .foregroundColor(.white)
-                                        .padding()
-                                        .imageScale(.medium)
-                                }
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                    }
-                }
+                EmptyView()
             }
             .font(.system(.headline, design: .rounded))
             .frame(maxWidth: .infinity, alignment: .trailing)

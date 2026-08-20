@@ -34,7 +34,6 @@ struct BoringExtrasMenu : View {
         VStack{
             HStack(spacing: 20)  {
                 hide
-                settings
                 close
             }
         }
@@ -50,24 +49,6 @@ struct BoringExtrasMenu : View {
             icon: Image(.github),
             title: "Checkout"
         )
-    }
-    
-    var settings: some View {
-        Button(action: {
-            DispatchQueue.main.async {
-                SettingsWindowController.shared.showWindow()
-            }
-        }) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 12.0).fill(.black).frame(width: 70, height: 70)
-                VStack(spacing: 8) {
-                    Image(systemName: "gear").resizable()
-                        .aspectRatio(contentMode: .fit).frame(width:20)
-                    Text("Settings").font(.body)
-                }
-            }
-        }
-        .buttonStyle(PlainButtonStyle()).shadow(color: .black.opacity(0.5), radius: 10)
     }
     
     var hide: some View {

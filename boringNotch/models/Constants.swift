@@ -233,7 +233,7 @@ extension Defaults.Keys {
     static let isMirrored = Key<Bool>("isMirrored", default: true)
     static let mirrorShape = Key<MirrorShapeEnum>("mirrorShape", default: MirrorShapeEnum.rectangle)
     static let mirrorCameraID = Key<String?>("mirrorCameraID", default: nil)
-    static let settingsIconInNotch = Key<Bool>("settingsIconInNotch", default: true)
+    static let settingsIconInNotch = Key<Bool>("settingsIconInNotch", default: false)
     static let lightingEffect = Key<Bool>("lightingEffect", default: true)
     static let enableShadow = Key<Bool>("enableShadow", default: true)
     static let cornerRadiusScaling = Key<Bool>("cornerRadiusScaling", default: true)
@@ -294,7 +294,7 @@ extension Defaults.Keys {
     static let showOpenNotchOSDPercentage = Key<Bool>("showOpenNotchOSDPercentage", default: true)
     static let showClosedNotchOSDPercentage = Key<Bool>("showClosedNotchOSDPercentage", default: false)
     // Option key modifier behaviour for media keys
-    static let optionKeyAction = Key<OptionKeyAction>("optionKeyAction", default: OptionKeyAction.openSettings)
+    static let optionKeyAction = Key<OptionKeyAction>("optionKeyAction", default: OptionKeyAction.none)
     // Brightness/volume/keyboard source selection
     static let osdBrightnessSource = Key<OSDControlSource>("osdBrightnessSource", default: .builtin)
     static let osdVolumeSource = Key<OSDControlSource>("osdVolumeSource", default: .builtin)
