@@ -2,6 +2,8 @@
 
 A minimal macOS notch app for Spotify / system Now Playing.
 
+![Edge Spotify demo](assets/demo.gif)
+
 Fork of [Boring Notch](https://github.com/TheBoredTeam/boring.notch) — same notch chrome and music live-activity, stripped to music only.
 
 Hover the **notch** to open the player. Control Spotify or whatever is in system Now Playing. It lives in the menu bar (no Dock icon).
