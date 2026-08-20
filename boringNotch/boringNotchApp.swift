@@ -9,14 +9,15 @@ import AVFoundation
 import Combine
 import Defaults
 import KeyboardShortcuts
+import LaunchAtLogin
 import Sparkle
 import SwiftUI
 
 @main
 struct DynamicNotchApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @Default(.menubarIcon) var showMenuBarIcon
     @Environment(\.openWindow) var openWindow
+    @State private var openAtLogin = LaunchAtLogin.isEnabled
 
     private let sparkleUpdaterDelegate: BoringSparkleUpdaterDelegate
     let updaterController: SPUStandardUpdaterController
@@ -27,21 +28,37 @@ struct DynamicNotchApp: App {
         updaterController = SPUStandardUpdaterController(
             startingUpdater: true, updaterDelegate: sparkleUpdaterDelegate, userDriverDelegate: nil)
         SoftwareUpdateStore.updater = updaterController.updater
-
     }
 
     var body: some Scene {
-        MenuBarExtra("boring.notch", systemImage: "sparkle", isInserted: $showMenuBarIcon) {
-            CheckForUpdatesView(updater: updaterController.updater)
+        MenuBarExtra("Edge Spotify", systemImage: "music.note") {
+            Toggle("Open at Login", isOn: Binding(
+                get: { openAtLogin },
+                set: { newValue in
+                    LaunchAtLogin.isEnabled = newValue
+                    openAtLogin = LaunchAtLogin.isEnabled
+                }
+            ))
             Divider()
             Button("Restart") {
                 ApplicationRelauncher.restart()
             }
-            Button("Quit", role: .destructive) {
+            Button("Quit Edge Spotify", role: .destructive) {
                 NSApplication.shared.terminate(self)
             }
             .keyboardShortcut(KeyEquivalent("Q"), modifiers: .command)
         }
+    }
+}
+
+enum EdgeSpotifyLaunchAtLogin {
+    private static let didConfigureKey = "didConfigureLaunchAtLogin"
+
+    /// Enable once on first run so the app comes back after reboot.
+    static func enableOnFirstLaunchIfNeeded() {
+        guard !UserDefaults.standard.bool(forKey: didConfigureKey) else { return }
+        UserDefaults.standard.set(true, forKey: didConfigureKey)
+        LaunchAtLogin.isEnabled = true
     }
 }
 
@@ -285,6 +302,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        EdgeSpotifyLaunchAtLogin.enableOnFirstLaunchIfNeeded()
 
         NotificationCenter.default.addObserver(
             self,

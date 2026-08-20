@@ -1,24 +1,53 @@
-# Edge Spotify (Boring Notch fork)
+# Edge Spotify
 
-Spotify / system **Now Playing**-only fork of [Boring Notch](https://github.com/TheBoredTeam/boring.notch) (GPL-3.0).
+A minimal macOS notch app for Spotify / system Now Playing.
 
-Keeps Boring Notch’s exact notch chrome and music live-activity / open-notch player UI, wired to:
+Fork of [Boring Notch](https://github.com/TheBoredTeam/boring.notch) — same notch chrome and music live-activity, stripped to music only.
 
-- **Spotify** (`SpotifyController`)
-- **Now Playing** (`NowPlayingController` + `mediaremote-adapter`)
+Hover the **notch** to open the player. Control Spotify or whatever is in system Now Playing. It lives in the menu bar (no Dock icon).
 
-Calendar, Shelf, OSD/HUD, Webcam, Battery, Downloads, YouTube Music, Apple Music as a selectable source, and the XPC helper are removed.
+## Requirements
 
-## Build
+- macOS 14+
+- Xcode (`xcode-select --install` is not enough; full Xcode is required)
 
-Requires Xcode / `xcodebuild` on macOS:
-
-```bash
-xcodebuild -project boringNotch.xcodeproj -scheme boringNotch -configuration Debug -destination 'platform=macOS' -derivedDataPath /tmp/edge-spotify-dd build
-```
-
-Run:
+## Run
 
 ```bash
-open /tmp/edge-spotify-dd/Build/Products/Debug/boringNotch.app
+./Scripts/run.sh
 ```
+
+Build only:
+
+```bash
+./Scripts/build.sh
+open .build/EdgeSpotify.app
+```
+
+For a stable login item, install somewhere lasting (recommended — `./Scripts/run.sh` does this):
+
+```bash
+./Scripts/build.sh
+cp -R .build/EdgeSpotify.app /Applications/
+open /Applications/EdgeSpotify.app
+```
+
+## Use
+
+1. Play music in Spotify (or another app that reports Now Playing)
+2. Hover the MacBook notch to open the player
+3. Menu bar → **Edge Spotify** → Quit
+
+### Open at Login
+
+On first launch, Edge Spotify registers itself to start when you log in. Toggle it anytime via menu bar → **Open at Login**.
+
+macOS may ask for permission under **System Settings → General → Login Items**.
+
+## Stack
+
+Native Swift + SwiftUI (Boring Notch fork) + `mediaremote-adapter` for system Now Playing.
+
+## License
+
+GPL-3.0 (upstream Boring Notch)
